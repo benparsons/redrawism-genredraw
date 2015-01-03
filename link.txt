@@ -1,0 +1,3 @@
+http://localhost:3000/render/?indexes=31,150,2249,20000&filename=ct3slavo.png
+
+http://localhost:3000/render/?indexes=60,2249&filename=ct3slavo.png ( 1 & 3 )

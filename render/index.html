@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+
+    <script src="../js/angular.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.js"></script>
+
+    <script src="../js/render.js"></script>
+    <script src="../js/util.js"></script>
+    <script>
+        var filename = getParameterByName("filename");
+        var indexes = getParameterByName("indexes").split(',');
+    </script>
+
+
+</head>
+<body ng-app="myapp">
+<div ng-controller="RenderCtrl">
+    
+    <div ng-repeat="frame in frames" style="float:left">
+        <iframe ng-src="{{frame.url}}" height="400px;" width="400px"  frameBorder="0"></iframe><br />
+        Bounding Box Size: {{frame.boundingBox}}<br >
+        Current Distance: {{frame.currentDistance}}<br >
+        Date: {{frame.date}}<br >
+        Count: {{frame.polyArrayLength}}<br >
+        Successes: {{frame.successes}}<br >
+        Total Draws: {{frame.totalDraws}}
+    </div>
+</div>
+</body>
+</html>
