@@ -4,7 +4,9 @@ var app = express();
 
 var dburl = 'genredraw';
 var collections = ['frames', 'pallets'];
-var db = require('mongojs').connect(dburl, collections);
+var mongojs = require('mongojs');
+
+var db = mongojs(dburl, collections);
 
 var bodyParser = require('body-parser')
 app.use( bodyParser.json({limit: '50mb'}) );       // to support JSON-encoded bodies
@@ -46,7 +48,7 @@ app.get('/get/frame', function (req, res) {
     var query = url_parts.query;
     var result = query['status'];
 console.log(query['filename']);
-	db.frames.find({filename: query['filename']}, {skip: parseInt(query['index'], 10), limit: 1, sort: {totalDraws:1}},
+	db.frames.find({filename: query['filename']}).sort({totalDraws:1}).skip(parseInt(query['index'], 10)).limit(1,
 	function(err, result) {
 	
 		console.log(query['filename']);
