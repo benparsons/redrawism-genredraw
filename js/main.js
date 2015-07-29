@@ -42,6 +42,10 @@ var reduceEvery = getParameterByName("reduceEvery");
 if (! reduceEvery) {
 	reduceEvery = 1000;
 }
+var minBoxSize = getParameterByName("minBoxSize");
+if (! minBoxSize) {
+	minBoxSize = 100;
+}
 
 
 for (var i = 0; i < randomIntFromInterval(10, 20); i++) {
@@ -164,7 +168,7 @@ function drawLoop() {
     var currentSuccessRatio = successes / totalDraws;
     if (totalDraws % 1000 === 0) {
         if (currentSuccessRatio < previousSuccessRatio) {
-            if (boundingBox > 100) {
+            if (boundingBox > minBoxSize) {
                 boundingBox--;
             }
             console.log(boundingBox);
