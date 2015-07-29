@@ -38,6 +38,11 @@ var recordEvery = getParameterByName("recordEvery");
 if (! recordEvery) {
 	recordEvery = 10;
 }
+var reduceEvery = getParameterByName("reduceEvery");
+if (! reduceEvery) {
+	reduceEvery = 1000;
+}
+
 
 for (var i = 0; i < randomIntFromInterval(10, 20); i++) {
     addPoly();
@@ -112,7 +117,7 @@ function init() {
         var colorItem = '#' + red + green + blue;
         if (coloursArray.indexOf(colorItem) == -1) {
             coloursArray.push(colorItem);
-            if (coloursArray.length % 1000 === 0) {
+            if (coloursArray.length % reduceEvery === 0) {
                 console.log("coloursArray.length: " + coloursArray.length);
 //                    $.ajax({
 //                        type: "GET",
