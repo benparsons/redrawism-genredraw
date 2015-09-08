@@ -10,7 +10,7 @@ var canvasImage = document.getElementById('image'),
 
 var canvas = document.getElementById("canvas")
 
-canvas
+var maxPolygons = 200;
 
 make_base();
 
@@ -214,7 +214,7 @@ function modify() {
 }
 
 function addPoly() {
-    //if (polyArray.length > maxPolygons) return;
+    if (polyArray.length > maxPolygons) return;
 
     var points = [];
     points.push(randomIntFromInterval(0, canvas.width));
