@@ -1,3 +1,11 @@
 http://localhost:3000/render/?indexes=31,150,2249,20000&filename=ct3slavo.png
 
 http://localhost:3000/render/?indexes=60,2249&filename=ct3slavo.png ( 1 & 3 )
+
+http://localhost:3000/render/index640x480.html?filename=source/lyingongrass.jpg&indexes=400,2140,3650,8305
+
+http://localhost:3000/render/index640x480.html?filename=source/ch1.jpg&indexes=800,2140,3650,8305
+
+http://localhost:3000/render/?filename=source/teatimers-edited.jpg&indexes=1000,2500,3370,3900,4375
+
+http://localhost:3000/render/?filename=source/tommystinson.jpg&indexes=30,43,69,95,149,397,3150,20000,39000,40492

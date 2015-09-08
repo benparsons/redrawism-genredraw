@@ -18,15 +18,16 @@
 </head>
 <body ng-app="myapp">
 <div ng-controller="RenderCtrl">
-    
+
     <div ng-repeat="frame in frames" style="float:left">
-        <iframe ng-src="{{frame.url}}" height="400px;" width="400px"  frameBorder="0"></iframe><br />
+        <iframe ng-src="{{frame.url}}" height="700px;" width="640px"  frameBorder="0"></iframe>
+        <!--p><br />
         Bounding Box Size: {{frame.boundingBox}}<br >
         Current Distance: {{frame.currentDistance}}<br >
         Date: {{frame.date}}<br >
         Count: {{frame.polyArrayLength}}<br >
         Successes: {{frame.successes}}<br >
-        Total Draws: {{frame.totalDraws}}
+        Total Draws: {{frame.totalDraws}}</p-->
     </div>
 </div>
 </body>

@@ -6,7 +6,7 @@ function RenderCtrl($scope, $http) {
         $scope.parsed = [] // Initialize with an empty array
         $scope.index = 0;
         $scope.frames = [];
-		
+
 		angular.forEach(indexes, function (value, key) {
             $http({
                 method: "GET",
@@ -14,7 +14,7 @@ function RenderCtrl($scope, $http) {
             }).success(function (data) {
                 var newFrame = data[0];
                 //newFrame.url = "/render/renderSingle.html?width=169&height=225&multiplier=0.5&background=000000&poly=" + encodeURIComponent(JSON.stringify(newFrame.polyArray));
-                newFrame.url = "/render/renderSingle.html?width=676&height=900&multiplier=2&background=000000&poly=" + encodeURIComponent(JSON.stringify(newFrame.polyArray));
+                newFrame.url = "/render/renderAnimate.html?width=640&height=700&multiplier=1&background=000000&poly=" + encodeURIComponent(JSON.stringify(newFrame.polyArray));
 
                 $scope.frames.push(newFrame);
 

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="../js/util.js"></script>
+</head>
+<body>
+
+<canvas width="1155px" height="1155px" id="canvas"></canvas>
+<script>
+    var polyFromUrl = getParameterByName("poly");
+    var polyArray = JSON.parse(polyFromUrl);
+    var background = getParameterByName("background");
+    if (! background) {
+        background = "#ffffff";
+    }
+
+    var renderWidth = getParameterByName("width");
+    if (! renderWidth) {
+        renderWidth = 500;
+    }
+    var renderHeight = getParameterByName("height");
+    if (! renderHeight) {
+        renderHeight = 500;
+    }
+
+    var renderMultiplier = getParameterByName("multiplier");
+    if (! renderMultiplier) {
+        renderMultiplier = 1;
+    }
+
+    var canvas;
+    var ctx;
+
+    setInterval('drawLoop("canvas")', 100);
+
+    function drawLoop(canvasId) {
+        canvas=document.getElementById(canvasId)
+
+        ctx = canvas.getContext('2d');
+
+        ctx.canvas.width  = renderWidth;
+        ctx.canvas.height = renderHeight;
+
+        ctx.rect(0,0,canvas.width,canvas.height);
+        ctx.fillStyle= "#" + background;
+        ctx.fill();
+
+        for (i = 0; i < polyArray.length; i++) {
+            drawPoly(polyArray[i].points, polyArray[i].colour);
+        }
+    }
+    var randomisation = 4;
+    function drawPoly(poly, colour) {
+        ctx.fillStyle = colour;
+        var offset = 0;
+        ctx.beginPath();
+        var randomInt = Math.floor((Math.random() * randomisation) - 2*randomisation);
+        //randomisation ++;
+        if (randomisation > 20) randomisation = 1;
+        ctx.moveTo(poly[0] * renderMultiplier + offset  + randomInt, poly[1]*renderMultiplier + offset  + randomInt);
+        for( item=2 ; item < poly.length-1 ; item+=2 ){
+            var newX = (poly[item]) * renderMultiplier + offset + randomInt;
+            var newY = (poly[item+1]) * renderMultiplier + offset + randomInt;
+            ctx.lineTo( newX , newY )
+        }
+
+        ctx.closePath();
+
+        ctx.fill();
+    }
+</script>
+</body>
+</html>
