@@ -12,6 +12,20 @@
     <script>
         var filename = getParameterByName("filename");
         var indexes = getParameterByName("indexes").split(',');
+        var width = getParameterByName("width");
+        var height = getParameterByName("height");
+        setTimeout('sizeFrames()', 2000);
+        
+        function sizeFrames(){
+            var list = Array.prototype.slice.call( document.getElementsByTagName("iframe") )
+
+            list.forEach(function(frame){
+                if (frame.src.length > 0) {
+                    frame.width = width;
+                    frame.height = height;
+                }
+            });
+        }
     </script>
 
 
