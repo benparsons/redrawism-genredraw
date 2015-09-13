@@ -166,7 +166,7 @@ function drawLoop() {
         drawPoly(polyArray[i].points, polyArray[i].colour);
     }
     var currentSuccessRatio = successes / totalDraws;
-    if (totalDraws % 1000 === 0) {
+    if (totalDraws % reduceEvery === 0) {
         if (currentSuccessRatio < previousSuccessRatio) {
             if (boundingBox > minBoxSize) {
                 boundingBox--;
