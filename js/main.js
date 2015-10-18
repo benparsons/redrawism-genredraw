@@ -235,45 +235,14 @@ function addPoly() {
         points.push(randomIntFromInterval(minX, maxX));
         points.push(randomIntFromInterval(minY, maxY));
     }
+
+    var polyColour = '';
+    polyColour = getAverageColour(points);
+
     polyArray.push({
         points: points,
-        colour: getRandomColor()
+        colour: polyColour
     });
-}
-
-function addPolyCheat() {
-    var cheatX = randomIntFromInterval(0, canvas.width);
-    var cheatY = randomIntFromInterval(0, canvas.height);
-    var selectedColour = ctxImage.getImageData(cheatX, cheatY, 1, 1).data;
-    var red = selectedColour[0].toString(16);
-    if (red.length < 2) {
-        red = '0' + red;
-    }
-    var green = selectedColour[1].toString(16);
-    if (green.length < 2) {
-        green = '0' + green;
-    }
-    var blue = selectedColour[2].toString(16);
-    if (blue.length < 2) {
-        blue = '0' + blue;
-    }
-    var colorItem = '#' + red + green + blue;
-    //return colorItem;
-    console.log(cheatX + " " + cheatY + " " + colorItem);
-
-    var pointCount = randomIntFromInterval(3, 4);
-    var points = [];
-    points.push(cheatX);
-    points.push(cheatY);
-    for (var j = 0; j < pointCount; j++) {
-        points.push(randomIntFromInterval(0, canvas.width));
-        points.push(randomIntFromInterval(0, canvas.height));
-    }
-    polyArray.push({
-        points: points,
-        colour: getRandomColor()
-    });
-
 }
 
 function removePoly(removeIndex) {
@@ -341,15 +310,46 @@ function status() {
 
 // from http://stackoverflow.com/questions/1484506/random-color-generator-in-javascript
 function getRandomColor() {
-    var colourIndex = randomIntFromInterval(0, coloursArray.length - 1);
-    return coloursArray[colourIndex];
+    var colourMode = 2;
+    if (colourMode == 1) {
+      var letters = '0123456789ABCDEF'.split('');
+      var color = '#';
+      for (var i = 0; i < 6; i++ ) {
+         color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    }
+    else if (colourMode == 2) {
+      var colourIndex = randomIntFromInterval(0, coloursArray.length - 1);
+      return coloursArray[colourIndex];
+    }
+}
 
-    //var letters = '0123456789ABCDEF'.split('');
-    //var color = '#';
-    //for (var i = 0; i < 6; i++ ) {
-    //    color += letters[Math.floor(Math.random() * 16)];
-    //}
-    //return color;
+function getAverageColour(points) {
+    var redAcc = 0;
+    var blueAcc = 0;
+    var greenAcc = 0;
+    for (var j = 0; j < points.length; j=j+2) {
+        var pixelData = ctxImage.getImageData(points[j],points[j+1],1,1).data;
+        redAcc += pixelData[0];
+        greenAcc += pixelData[1];
+        blueAcc += pixelData[2];
+    }
+
+    var actualPoints = points.length/2;
+    var red = Math.round(redAcc / actualPoints).toString(16);
+    if (red.length < 2) {
+        red = '0' + red;
+    }
+    var green = Math.round(greenAcc / actualPoints).toString(16);
+    if (green.length < 2) {
+        green = '0' + green;
+    }
+    var blue = Math.round(blueAcc / actualPoints).toString(16);
+    if (blue.length < 2) {
+        blue = '0' + blue;
+    }
+    return '#' + red + green + blue;
 }
 
 // from http://stackoverflow.com/questions/4959975/generate-random-value-between-two-numbers-in-javascript
