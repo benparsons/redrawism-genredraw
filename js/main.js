@@ -190,7 +190,7 @@ function modify() {
         modifyPoly();
     }
     else if (changeMode < 85) {
-        addPoly();
+        if (!addPoly()) return;
     }
     else {
         removePoly();
@@ -214,7 +214,7 @@ function modify() {
 }
 
 function addPoly() {
-    if (polyArray.length > maxPolygons) return;
+    if (polyArray.length > maxPolygons) return false;
 
     var points = [];
     points.push(randomIntFromInterval(0, canvas.width));
@@ -229,7 +229,7 @@ function addPoly() {
     var minY = points[1] - boundingBox;
     if (minY < 0) minY = 0;
     var maxY = points[1] + boundingBox;
-    if (maxY > canvas.height) maxX = canvas.height;
+    if (maxY > canvas.height) maxY = canvas.height;
 
     for (var j = 0; j < pointCount; j++) {
         points.push(randomIntFromInterval(minX, maxX));
@@ -243,6 +243,7 @@ function addPoly() {
         points: points,
         colour: polyColour
     });
+    return true;
 }
 
 function removePoly(removeIndex) {
@@ -292,13 +293,14 @@ function status() {
     statusObj.successes = successes;
     statusObj.currentDistance = currentDistance;
     statusObj.polyArrayLength = polyArray.length;
-    statusObj.polyArray = polyArray;
     statusObj.boundingBox = boundingBox;
     statusObj.filename = filename;
     statusObj.width = width;
     statusObj.height = height;
     var statusString = JSON.stringify(statusObj);
     console.log(statusString);
+    statusObj.polyArray = polyArray;
+    statusString = JSON.stringify(statusObj);
     //$.get('http://localhost:4040/status=' + statusString)
     $.ajax({
         type: "GET",

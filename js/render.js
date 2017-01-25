@@ -14,8 +14,8 @@ function RenderCtrl($scope, $http) {
             }).success(function (data) {
                 var newFrame = data[0];
                 //newFrame.url = "/render/renderSingle.html?width=169&height=225&multiplier=0.5&background=000000&poly=" + encodeURIComponent(JSON.stringify(newFrame.polyArray));
-                newFrame.url = "/render/renderAnimate.html?width=" + newFrame.width + 
-                    "&height=" + newFrame.height + 
+                newFrame.url = "/render/renderSingle.html?width=" + newFrame.width + 
+                    "&height=" + newFrame.height +
                     "&multiplier=1&background=000000&poly=" + encodeURIComponent(JSON.stringify(newFrame.polyArray));
 
                 $scope.frames.push(newFrame);
